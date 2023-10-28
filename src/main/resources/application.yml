@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/trail6 # Update the PostgreSQL connection URL
+    username: trails
+    password: trails
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect  # Use the PostgreSQL dialect
+    hibernate:
+      ddl-auto: update  # or any other value you prefer (e.g., "validate" or "none")
+    show-sql: false
+
+jwt:
+  private.key: classpath:app.key
+  public.key: classpath:app.pub
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    enabled: true
+    path: /api-docs
