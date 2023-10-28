@@ -1,0 +1,56 @@
+<h3>Features</h3>
+<div class="parameter-container">
+  <div *ngFor="let parameter of data; let i = index" class="parameter-card">
+    <div class="parameter-info">
+      <p><strong>ParameterID:</strong> {{ parameter.parameterId }}</p>
+      <p><strong>Name:</strong> {{ parameter.name }}</p>
+      <p><strong>Internal Name:</strong> {{ parameter.internalName }}</p>
+      <p><strong>Details:</strong> {{ parameter.details }}</p>
+      <p><strong>ParameterType:</strong> {{ parameter.parameterType }}</p>
+      <!-- <label for="parameterType">Parameter Type:</label>
+      <select id="parameterType" formControlName="parameterType">
+        <option *ngFor="let type of parameterTypes" [value]="type">{{ type }}</option>
+      </select> -->
+      <p><strong>values:</strong> {{ parameter.values }}</p>
+    </div>
+    <div class="parameter-actions">
+      <button (click)="toggleEditForm(parameter)">Edit</button>
+      <button (click)="deleteParameter(parameter.parameterId)">Delete</button> 
+    </div>
+  </div>
+</div>
+
+<!-- Edit Feature Form -->
+<div *ngIf="showEditForm" class="modal">
+  <div class="modal-content">
+    <form [formGroup]="parameterForm">
+      <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" formControlName="name" [value]="editedParameter?.name">
+      </div>
+      <div>
+        <label for="internalName">Internal Name:</label>
+        <input type="text" id="internalName" formControlName="internalName" [value]="editedParameter?.internalName">
+      </div>
+      <div>
+        <label for="details">Details:</label>
+        <textarea id="details" formControlName="details">{{ editedParameter?.details }}</textarea>
+      </div>
+      <div>
+      <label for="parameterType">Parameter Type:</label>
+      <select id="parameterType" formControlName="parameterType">
+        <option *ngFor="let type of parameterTypes" [value]="type">{{ type }}</option>
+      </select>
+      </div>
+      <div>
+        <label for="values">Values:</label>
+        <input type="text" id="values" formControlName="values" [value]="editedParameter?.values">
+      </div>
+
+      <div>
+        <button (click)="editParameter(editedParameter?.parameterId, parameterForm.value)">Save</button>
+        <button (click)="closeEditForm()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
